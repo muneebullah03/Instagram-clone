@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PostModel {
@@ -34,13 +36,14 @@ class PostModel {
   static PostModel fromJson(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
     return PostModel(
-        description: snapshot['description'],
-        uid: snapshot['uid'],
-        username: snapshot['username'],
-        postId: snapshot['postId'],
-        datePublished: snapshot['datePublished'],
-        photoUrl: snapshot['photoUrl'],
-        profImag: snapshot['profImag'],
-        likes: snapshot['likes']);
+      description: snapshot['description'],
+      uid: snapshot['uid'],
+      username: snapshot['username'],
+      postId: snapshot['postId'],
+      datePublished: snapshot['datePublished'],
+      photoUrl: snapshot['photoUrl'],
+      profImag: snapshot['profImag'],
+      likes: snapshot['likes'],
+    );
   }
 }

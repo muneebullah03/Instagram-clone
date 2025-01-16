@@ -4,14 +4,19 @@ import 'package:instagram_clone/resourcess/auth_services.dart';
 
 class UserProvider extends ChangeNotifier {
   final AuthServices _authServices = AuthServices();
-  UserModel? _user;
+  User? _user;
 
-  UserModel? get getUser => _user;
+  User get getUser => _user!;
 
   Future<void> refreshUser() async {
-    UserModel user =
-        await _authServices.getUserDetails(); // Correctly assign UserModel
-    _user = user;
-    notifyListeners(); // Notify listeners to update UI
+    try {
+      // Fetch user details and notify listeners
+      User user = await _authServices.getUserDetails();
+      _user = user;
+      notifyListeners();
+    } catch (e) {
+      // Handle errors (e.g., network issues)
+      print('Error fetching user details: $e');
+    }
   }
 }

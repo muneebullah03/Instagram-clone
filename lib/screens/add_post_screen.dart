@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
@@ -104,11 +106,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel? userModel = Provider.of<UserProvider>(context).getUser;
+    User userModel = Provider.of<UserProvider>(context).getUser;
 
     // Decode Base64 to Uint8List for displaying the profile picture
     Uint8List? profileImage =
-        userModel?.photoUrl != null ? base64Decode(userModel!.photoUrl) : null;
+        userModel.photoUrl != null ? base64Decode(userModel.photoUrl) : null;
 
     return _file == null
         ? Center(
@@ -132,7 +134,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      postImage(userModel!.uid, userModel.username,
+                      postImage(userModel.uid, userModel.username,
                           userModel.photoUrl);
                     },
                     child: Text(

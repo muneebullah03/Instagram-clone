@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:instagram_clone/models/user_model.dart';
+import 'package:instagram_clone/models/user_model.dart' as model;
 
 class AuthServices {
   final auth = FirebaseAuth.instance;
@@ -14,13 +14,13 @@ class AuthServices {
 
   // get user details
 
-  Future<UserModel> getUserDetails() async {
+  Future<model.User> getUserDetails() async {
     User currentUser = auth.currentUser!;
 
     DocumentSnapshot snap =
         await firestore.collection("users").doc(currentUser.uid).get();
 
-    return UserModel.fromSnapshot(snap);
+    return model.User.fromSnapshot(snap);
   }
 
   // sign up user
@@ -46,7 +46,7 @@ class AuthServices {
         // Encode image as Base64 string
         String base64Image = base64Encode(file);
 
-        UserModel userModel = UserModel(
+        model.User userModel = model.User(
           username: username,
           uid: credential.user!.uid,
           photoUrl: base64Image,
