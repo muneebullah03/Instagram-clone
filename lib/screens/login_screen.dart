@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/resourcess/auth_services.dart';
 import 'package:instagram_clone/screens/sign_up_screen.dart';
 import 'package:instagram_clone/utiles/app_colors.dart';
+import 'package:instagram_clone/utiles/global_veriable.dart';
 import 'package:instagram_clone/widgets/my_text_field.dart';
 
 import '../responsives/mobile_screen_layout.dart';
@@ -75,7 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
           child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 32),
+        padding: MediaQuery.of(context).size.width > webScreenSize
+            ? EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width / 3)
+            : EdgeInsets.symmetric(horizontal: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

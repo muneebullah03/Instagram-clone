@@ -87,4 +87,44 @@ class FirestoreMethods {
       print(e.toString());
     }
   }
+
+  // deleting post
+
+  Future<void> deletePost(String postId) async {
+    try {
+      await firestore.collection('posts').doc(postId).delete();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  /// follow user
+  Future<void> followUser(String uid, String followId) async {
+    try {
+      DocumentSnapshot snp = await firestore.collection('users').doc(uid).get();
+
+      List following = (snp.data() as Map<String, dynamic>)['following'];
+      if (following.contains(followId)) {
+        await firestore.collection('users').doc(followId).update({
+          'followers': FieldValue.arrayRemove([uid])
+        });
+        await firestore.collection('users').doc(uid).update({
+          'following': FieldValue.arrayRemove([uid])
+        });
+      } else {
+        await firestore.collection('users').doc(followId).update({
+          'followers': FieldValue.arrayUnion([uid])
+        });
+        await firestore.collection('users').doc(uid).update({
+          'following': FieldValue.arrayUnion([uid])
+        });
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> logout() async {
+    await auth.signOut();
+  }
 }

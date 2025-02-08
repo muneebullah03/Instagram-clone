@@ -9,6 +9,7 @@ import 'package:instagram_clone/responsives/responsive_screen_layout.dart';
 import 'package:instagram_clone/responsives/web_screen_layout.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utiles/app_colors.dart';
+import 'package:instagram_clone/utiles/global_veriable.dart';
 import 'package:instagram_clone/widgets/my_text_field.dart';
 import 'package:instagram_clone/widgets/my_button.dart';
 import '../resourcess/auth_services.dart';
@@ -120,7 +121,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 32),
+            padding: MediaQuery.of(context).size.width > webScreenSize
+                ? EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 3)
+                : EdgeInsets.symmetric(horizontal: 32),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

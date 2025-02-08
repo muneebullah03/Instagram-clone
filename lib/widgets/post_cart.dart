@@ -89,9 +89,13 @@ class _PostCartState extends State<PostCart> {
                               child: ListView(
                                 padding: EdgeInsets.symmetric(vertical: 16),
                                 shrinkWrap: true,
-                                children: ['Delete', 'Edit', 'Share', 'Report']
+                                children: ['Delete']
                                     .map((e) => InkWell(
-                                          onTap: () {},
+                                          onTap: () async {
+                                            await FirestoreMethods().deletePost(
+                                                widget.snap['postId']);
+                                            Navigator.pop(context);
+                                          },
                                           child: Container(
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 16, vertical: 12),
